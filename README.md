@@ -1,16 +1,16 @@
 # nginx-ssl-fingerprint
 
-A high performance nginx module for ja4, ja3, and http2 fingerprint.
+A high performance nginx module for ja4 and ja3 fingerprint.
 
 ## Patches
- - [nginx - save ja3/http2 fingerprint](patches)
+ - [nginx - save ja3/ja4 fingerprint](patches)
  - [openssl - save clienthello data](patches)
 
 ### Support Matrix
 
-|              | openssl-3.5.4 |
+|              | openssl-3.5.9 |
 | -------------| ------------- |
-| nginx-1.29.3 | ✅            |
+| nginx-1.31.7 | ✅            |
 
 ## Configuration
 
@@ -21,7 +21,6 @@ A high performance nginx module for ja4, ja3, and http2 fingerprint.
 | http_ssl_greased  | 0             | TLS greased flag.        |
 | http_ssl_ja3      | NULL          | The ja3 fingerprint.     |
 | http_ssl_ja3_hash | NULL          | The ja3 fingerprint hash.|
-| http2_fingerprint | NULL          | The http2 fingerprint.   |
 | http_ssl_ja4_r    | NULL          | The ja4 raw fingerprint. |
 | http_ssl_ja4      | NULL          | The ja4 fingerprint.     |
 | http_ssl_ja4_ro   | NULL          | The ja4 original raw fingerprint. |
@@ -36,7 +35,7 @@ http {
         ssl_certificate        cert.pem;
         ssl_certificate_key    priv.key;
         error_log              /dev/stderr debug;
-        return                 200 "ja4: $http_ssl_ja4\nja3: $http_ssl_ja3\nh2fp: $http2_fingerprint";
+        return                 200 "ja4: $http_ssl_ja4\nja3: $http_ssl_ja3";
     }
 }
 ```
